@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Search Images</h2>
+
+  <!-- Dropdown untuk memilih server -->
+  <label for="server">Choose Server:</label><br>
+  <select id="server" onchange="updateAction()">
+    <option value="http://127.0.0.1:5000">Localhost (127.0.0.1)</option>
+    <option value="http://172.15.3.24:5000">Network (172.15.3.24)</option>
+  </select><br><br>
+
+  <!-- Form untuk pencarian -->
+  <form id="searchForm" method="POST">
+    <label for="query">Search Query:</label><br>
+    <input type="text" id="query" name="query" value="cat"><br>
+    <label for="num_images">Number of Images:</label><br>
+    <input type="number" id="num_images" name="num_images" value="5"><br><br>
+    <input type="submit" value="Search">
+  </form>
+
+  <!-- JavaScript untuk mengubah 'action' form -->
+  <script>
+    function updateAction() {
+      const server = document.getElementById("server").value;
+      document.getElementById("searchForm").action = server + "/api/search";
+    }
+
+    // Set default action ketika halaman dimuat
+    window.onload = function() {
+      updateAction();
+    };
+  </script>
+</body>
+</html>

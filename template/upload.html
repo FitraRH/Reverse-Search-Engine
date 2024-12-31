@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Upload Images</h2>
+
+  <!-- Dropdown untuk memilih server -->
+  <label for="server">Choose Server:</label><br>
+  <select id="server" onchange="updateAction('uploadForm')">
+    <option value="http://127.0.0.1:5000">Localhost (127.0.0.1)</option>
+    <option value="http://172.15.3.24:5000">Network (172.15.3.24)</option>
+  </select><br><br>
+
+  <!-- Form untuk upload images -->
+  <form id="uploadForm" method="POST" enctype="multipart/form-data">
+    <label for="files">Select Images:</label><br>
+    <input type="file" id="files" name="files" multiple><br>
+    <label for="target_folder">Target Folder:</label><br>
+    <input type="text" id="target_folder" name="target_folder" value="my_folder"><br><br>
+    <input type="submit" value="Upload">
+  </form>
+
+  <!-- JavaScript untuk mengubah 'action' form -->
+  <script>
+    function updateAction(formId) {
+      const server = document.getElementById("server").value;
+      document.getElementById(formId).action = server + "/api/upload/images";
+    }
+
+    // Set default action ketika halaman dimuat
+    window.onload = function() {
+      updateAction('uploadForm');
+    };
+  </script>
+</body>
+</html>
